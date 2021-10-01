@@ -6,6 +6,8 @@
 
 package emailgenerator;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author omid
@@ -13,7 +15,7 @@ package emailgenerator;
 public class GetEmployeeInformation extends javax.swing.JFrame {
 
     /** Creates new form GetEmployeeInformation */
-    public GetEmployeeInformation() {
+    public GetEmployeeInformation(String company) {
         initComponents();
     }
 
@@ -30,11 +32,11 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        fname = new javax.swing.JTextField();
-        lname = new javax.swing.JTextField();
-        dob = new com.toedter.calendar.JDateChooser();
+        fnamefield = new javax.swing.JTextField();
+        lnamefield = new javax.swing.JTextField();
+        dobfield = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
-        department = new javax.swing.JComboBox<>();
+        departmentfield = new javax.swing.JComboBox<>();
         generatebtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,11 +51,11 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
 
         jLabel4.setText("Date of Birth:");
 
-        fname.setToolTipText("");
+        fnamefield.setToolTipText("");
 
         jLabel5.setText("Department:");
 
-        department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        departmentfield.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         generatebtn.setFont(new java.awt.Font("Ubuntu", 1, 24)); // NOI18N
         generatebtn.setText("Generate the Email");
@@ -84,10 +86,10 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lname)
-                            .addComponent(fname)
-                            .addComponent(dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(department, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lnamefield)
+                            .addComponent(fnamefield)
+                            .addComponent(dobfield, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(departmentfield, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,18 +100,18 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fnamefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lnamefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dobfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(department, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(departmentfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(generatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,7 +122,7 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatebtnActionPerformed
-        DisplayGeneratedEmail displayGeneratedEmail = new DisplayGeneratedEmail();
+        DisplayGeneratedEmail displayGeneratedEmail = new DisplayGeneratedEmail(company, fnamefield.getText().toString(), lnamefield.getText().toString(), dobfield.getDate(), departmentfield.getSelectedIndex());
         displayGeneratedEmail.show();
     }//GEN-LAST:event_generatebtnActionPerformed
 
@@ -151,25 +153,19 @@ public class GetEmployeeInformation extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GetEmployeeInformation().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> department;
-    private com.toedter.calendar.JDateChooser dob;
-    private javax.swing.JTextField fname;
+    private javax.swing.JComboBox<String> departmentfield;
+    private com.toedter.calendar.JDateChooser dobfield;
+    private javax.swing.JTextField fnamefield;
     private javax.swing.JButton generatebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField lname;
+    private javax.swing.JTextField lnamefield;
     // End of variables declaration//GEN-END:variables
 
 }

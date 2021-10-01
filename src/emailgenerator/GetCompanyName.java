@@ -16,6 +16,7 @@ public class GetCompanyName extends javax.swing.JFrame {
      */
     public GetCompanyName() {
         initComponents();
+        
     }
 
     /**
@@ -94,7 +95,7 @@ public class GetCompanyName extends javax.swing.JFrame {
     }//GEN-LAST:event_company_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GetEmployeeInformation getEmployeeInformation = new GetEmployeeInformation();
+        GetEmployeeInformation getEmployeeInformation = new GetEmployeeInformation(company_name.getText().toString());
         getEmployeeInformation.show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
