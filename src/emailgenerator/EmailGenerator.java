@@ -19,6 +19,8 @@ public class EmailGenerator {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.show();
         System.out.println("What is the name of the Company? ");
         Scanner sc = new Scanner(System.in);
         String comapny_name = sc.next().toLowerCase();
