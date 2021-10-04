@@ -10,7 +10,7 @@ package emailgenerator;
  * @author omid
  */
 public enum Departments {
-    sales(0), developments(1), accounting(2), none(3);
+    NONE(0), DEVELOPMENTS(1), ACCCOUNTING(2), SALES(3);
 
     private final int department_code;
     Departments(int ord){
@@ -19,5 +19,26 @@ public enum Departments {
     
     public int getDepartmentCode(){
         return this.department_code;
+    } 
+
+    public static Departments getNONE() {
+        return NONE;
+    }
+
+    public static Departments getDEVELOPMENTS() {
+        return DEVELOPMENTS;
+    }
+
+    public static Departments getACCCOUNTING() {
+        return ACCCOUNTING;
+    }
+
+    public static Departments getSALES() {
+        return SALES;
+    }
+    
+    
+    public String toString(){
+        return this.name();
     }
 }

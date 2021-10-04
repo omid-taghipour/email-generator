@@ -7,6 +7,7 @@ package emailgenerator;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,14 +19,18 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
     /**
      * Creates new form GetEmployeeInfo
      */
-    
     private String company_name = "none";
-    
+
     public GetEmployeeInfo(String company) {
         initComponents();
         company_name = company;
+               
+        departmentfield.setModel(new javax.swing.DefaultComboBoxModel<>(enumToStrings()));
     }
 
+    private String[] enumToStrings(){
+        return Arrays.stream(Departments.values()).map(Enum :: name).toArray(String[]::new);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -188,7 +193,7 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
