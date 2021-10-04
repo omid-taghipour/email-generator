@@ -30,7 +30,7 @@ public class GetCompanyName extends javax.swing.JFrame {
 
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
-        company_name = new javax.swing.JTextField();
+        companyfield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         jPasswordField1.setText("jPasswordField1");
@@ -42,13 +42,13 @@ public class GetCompanyName extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("What is the company name?");
 
-        company_name.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        company_name.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        company_name.setToolTipText("");
-        company_name.setName(""); // NOI18N
-        company_name.addActionListener(new java.awt.event.ActionListener() {
+        companyfield.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        companyfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        companyfield.setToolTipText("");
+        companyfield.setName(""); // NOI18N
+        companyfield.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                company_nameActionPerformed(evt);
+                companyfieldActionPerformed(evt);
             }
         });
 
@@ -68,7 +68,7 @@ public class GetCompanyName extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
-                    .addComponent(company_name)
+                    .addComponent(companyfield)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -78,24 +78,23 @@ public class GetCompanyName extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(company_name, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(companyfield, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        company_name.getAccessibleContext().setAccessibleName("");
-        company_name.getAccessibleContext().setAccessibleDescription("");
+        companyfield.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void company_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_company_nameActionPerformed
+    private void companyfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_companyfieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_company_nameActionPerformed
+    }//GEN-LAST:event_companyfieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GetEmployeeInformation getEmployeeInformation = new GetEmployeeInformation(company_name.getText().toString());
+        GetEmployeeInfo getEmployeeInformation = new GetEmployeeInfo(companyfield.getText());
         getEmployeeInformation.show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -135,7 +134,7 @@ public class GetCompanyName extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField company_name;
+    private javax.swing.JTextField companyfield;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPasswordField jPasswordField1;
