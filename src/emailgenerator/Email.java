@@ -31,7 +31,7 @@ public class Email {
         if (employee.getDepartment().toString().equals("none")) {
             this.address+=company+".com";
         }else{
-            this.address+=employee.getDepartment().toString()+"."+company+".com";
+            this.address+=employee.getDepartment().toString().toLowerCase()+"."+company+".com";
         }
     }
 
