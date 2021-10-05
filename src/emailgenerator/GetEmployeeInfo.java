@@ -5,14 +5,14 @@
  */
 package emailgenerator;
 
-import com.sun.jdi.connect.spi.Connection;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import java.sql.*;  
 
 /**
  *
@@ -190,9 +190,29 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         Integer department = departmentfield.getSelectedIndex();
         Employee emp = new Employee(firstnamefield.getText().toLowerCase(), lastnamefield.getText().toLowerCase(), LocalDate.ofInstant(dobfield.getDate().toInstant(), ZoneId.of("UTC")), Departments.values()[department]);
         Email emp_Email = new Email(company_name, altmailfield.getText().toLowerCase(), emp, (Integer) (capacityfield.getValue()));
-        JOptionPane.showMessageDialog(null, emp_Email);
+
+        //Connecting to database
+        String URL = "jdbc:mysql:localhost:3306:Email_Generator";
+        String username = "root";
+        String password = "5272";
         
+       
+        try {
+            Connection conn = DriverManager.getConnection(URL, username, password);
+            PreparedStatement insert_Employee;
+            insert_Employee = conn.prepareStatement("INSERT INTO Employees(employee_first_name, employee_last_name, employee_dob, employee_department) VALUES (?,?,?,?)");
+            insert_Employee.setString(1, firstnamefield.getText().toLowerCase());
+            insert_Employee.setString(2, lastnamefield.getText().toLowerCase());
+            insert_Employee.setDate(3, (((Date)dobfield.getDate())));
+            insert_Employee.setInt(4, departmentfield.getSelectedIndex());
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error with Insertion of Employee"+ex.getMessage());
+        }
         
+        //Opening new Window
+        DisplayGeneratedEmail displayGeneratedEmail = new DisplayGeneratedEmail(emp_Email);
+        displayGeneratedEmail.show();
     }//GEN-LAST:event_finishbtnActionPerformed
 
     /**
@@ -225,7 +245,6 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
             }
         });
     }
