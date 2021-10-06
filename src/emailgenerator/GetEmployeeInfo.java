@@ -61,7 +61,7 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         finishbtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setToolTipText("");
 
@@ -190,25 +190,8 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         Integer department = departmentfield.getSelectedIndex();
         Employee emp = new Employee(firstnamefield.getText().toLowerCase(), lastnamefield.getText().toLowerCase(), LocalDate.ofInstant(dobfield.getDate().toInstant(), ZoneId.of("UTC")), Departments.values()[department]);
         Email emp_Email = new Email(company_name, altmailfield.getText().toLowerCase(), emp, (Integer) (capacityfield.getValue()));
-
-        //Connecting to database
-        String URL = "jdbc:mysql:localhost:3306:Email_Generator";
-        String username = "root";
-        String password = "5272";
         
-       
-        try {
-            Connection conn = DriverManager.getConnection(URL, username, password);
-            PreparedStatement insert_Employee;
-            insert_Employee = conn.prepareStatement("INSERT INTO Employees(employee_first_name, employee_last_name, employee_dob, employee_department) VALUES (?,?,?,?)");
-            insert_Employee.setString(1, firstnamefield.getText().toLowerCase());
-            insert_Employee.setString(2, lastnamefield.getText().toLowerCase());
-            insert_Employee.setDate(3, (((Date)dobfield.getDate())));
-            insert_Employee.setInt(4, departmentfield.getSelectedIndex());
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error with Insertion of Employee"+ex.getMessage());
-        }
+        // Saving Data to the database
         
         //Opening new Window
         DisplayGeneratedEmail displayGeneratedEmail = new DisplayGeneratedEmail(emp_Email);
