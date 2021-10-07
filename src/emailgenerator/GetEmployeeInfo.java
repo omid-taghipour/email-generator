@@ -5,7 +5,6 @@
  */
 package emailgenerator;
 
-
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
@@ -190,9 +189,50 @@ public class GetEmployeeInfo extends javax.swing.JFrame {
         Integer department = departmentfield.getSelectedIndex();
         Employee emp = new Employee(firstnamefield.getText().toLowerCase(), lastnamefield.getText().toLowerCase(), LocalDate.ofInstant(dobfield.getDate().toInstant(), ZoneId.of("UTC")), Departments.values()[department]);
         Email emp_Email = new Email(company_name, altmailfield.getText().toLowerCase(), emp, (Integer) (capacityfield.getValue()));
-        
+
         // Saving Data to the database
-        
+        String username = "java_email_user";
+        String password = "1234";
+        String connection_string = "jdbc:mysql://localhost:3306/email_generator";
+        try {
+            Connection conn = DriverManager.getConnection(connection_string, username, password);
+
+            String insert_employee_sql = "INSERT INTO employees(employee_first_name,employee_last_name, employee_dob, employee_department) VALUES (?,?,?,?)";
+            PreparedStatement insert_employee_Statement = conn.prepareStatement(insert_employee_sql);
+
+            insert_employee_Statement.setString(1, firstnamefield.getText());
+            insert_employee_Statement.setString(2, lastnamefield.getText());
+            insert_employee_Statement.setDate(3, new java.sql.Date(dobfield.getDate().getTime()));
+            insert_employee_Statement.setInt(4, departmentfield.getSelectedIndex());
+
+            insert_employee_Statement.execute();
+
+            //GETTIING THE ID OF THE INSERTED EMPLOYEE
+            int employee_id = 0;
+            String employee_id_sql = "SELECT MAX(employee_id) AS 'employee_id' FROM employees";
+            PreparedStatement employee_id_Statement = conn.prepareStatement(employee_id_sql);
+            ResultSet rs = employee_id_Statement.executeQuery();
+
+            while (rs.next()) {
+                employee_id = rs.getInt("employee_id");
+            }
+
+            // INSSERT EMAIL INFORMATION TO THE DATABSE
+            String insert_email_sql = "INSERT INTO emails (email_address, email_alt, email_employee, email_capacity, email_password) VALUES (?,?,?,?,?)";
+            PreparedStatement insert_email_Statement = conn.prepareStatement(insert_email_sql);
+
+            insert_email_Statement.setString(1, emp_Email.getAddress());
+            insert_email_Statement.setString(2, emp_Email.getAlt_mail());
+            insert_email_Statement.setInt(3, employee_id);
+            insert_email_Statement.setInt(4, emp_Email.getMail_capacity());
+            insert_email_Statement.setString(5, emp_Email.getPassword());
+            
+            insert_email_Statement.execute();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Connection failed." + ex.getMessage()+ex.getSQLState());
+        }
+
         //Opening new Window
         DisplayGeneratedEmail displayGeneratedEmail = new DisplayGeneratedEmail(emp_Email);
         displayGeneratedEmail.show();

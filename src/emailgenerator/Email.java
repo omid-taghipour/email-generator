@@ -71,7 +71,19 @@ public class Email {
         return alt_mail;
     }
 
+    public String getCompany() {
+        return company;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    
     public Integer getMail_capacity() {
         return mail_capacity;
     }
